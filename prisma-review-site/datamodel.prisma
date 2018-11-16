@@ -1,0 +1,18 @@
+#SET_NULL(default) cascade
+type User {
+  id: ID! @unique
+  name: String!@unique
+  reviews:[Review!]!@relation(name:"ReviewToUser",onDelete:CASCADE)
+}
+type Book{
+  id:ID! @unique
+  name:String!
+  author:String!
+  reviews:[Review!]!@relation(name:"ReviewToBook",onDelete:CASCADE)
+}
+type Review{
+  id:ID! @unique
+  text:String
+  book:Book!@relation(name:"ReviewToBook",onDelete:SET_NULL)
+  reviewBy:User!@relation(name:"ReviewToUser",onDelete:SET_NULL)
+}
